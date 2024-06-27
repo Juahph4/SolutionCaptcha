@@ -1,17 +1,21 @@
+from flask import Flask, jsonify, request
 import Solve
 
-# Solve ReCaptcha
-result = Solve.ReCaptcha(
-    '6LfEaFkUAAAAAGnIJMG983t2JyYg0McK4CUuRAdk', # siteKey
-    'https://www.up-4ever.net/' # URL Website
-)
-print(result)
+app = Flask(__name__)
 
+@app.route('/solve_recaptcha', methods=['POST'])
+def solve_recaptcha():
+    data = request.get_json()
 
+    if 'site_key' not in data or 'url' not in data:
+        return jsonify({'error': 'Missing site_key or url in request body'}), 400
 
-# Solve HCaptcha
-# result = Solve.HCaptcha(
-#     '4c672d35-0701-42b2-88c3-78380b0db560', # siteKey
-#     'https://discord.com/' # URL Website
-# )
-# print(result)
+    site_key = data['site_key']
+    url = data['url']
+
+    result = Solve.ReCaptcha(site_key, url)
+
+    return jsonify(result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
