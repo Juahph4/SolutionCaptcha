@@ -3,6 +3,11 @@ import Solve
 
 app = Flask(__name__)
 
+
+@app.route('/', methods=['GET'])
+def welcome():
+    return jsonify({'message': 'Welcome to the ReCaptcha Solver API!'})
+
 @app.route('/solve_recaptcha', methods=['POST'])
 def solve_recaptcha():
     data = request.get_json()
