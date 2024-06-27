@@ -2,7 +2,7 @@
 FROM python:3.9-slim
 
 # Establece el directorio de trabajo
-WORKDIR /app
+WORKDIR /
 
 # Copia los archivos de la aplicación al contenedor
 COPY . .
@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 80
 
 # Define el comando de ejecución de la aplicación
-CMD ["python", "app.py"]
+CMD ["python", "getSolve.py"]
