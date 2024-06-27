@@ -13,5 +13,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Expone el puerto en el que se ejecutará la aplicación Flask
 EXPOSE 80
 
-# Define el comando de ejecución de la aplicación
-CMD ["python", "getSolve.py"]
+# Define el comando de ejecución de la aplicación con Gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:80", "getSolve:app"]
